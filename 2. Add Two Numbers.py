@@ -6,22 +6,21 @@
 class Solution:
     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
         dummyHead = ListNode(0)
-        curr = dummyHead
+        pointer = dummyHead
         carry = 0
-        while l1 != None or l2 != None:
+        while(l1 or l2 or carry):
             x = l1.val if l1 else 0
             y = l2.val if l2 else 0
 
             s = x + y + carry
+
+            num = s % 10
             carry = s // 10
 
-            curr.next = ListNode(s%10)
-            curr = curr.next
+            pointer.next = ListNode(num)
+            pointer = pointer.next
 
             l1 = l1.next if l1 else None
             l2 = l2.next if l2 else None
-
-        if(carry > 0):
-            curr.next = ListNode(carry)
 
         return dummyHead.next
